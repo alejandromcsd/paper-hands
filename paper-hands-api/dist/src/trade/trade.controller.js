@@ -1,0 +1,106 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TradeController = void 0;
+const common_1 = require("@nestjs/common");
+const trade_service_1 = require("./trade.service");
+const create_trade_dto_1 = require("./dto/create-trade.dto");
+const update_trade_dto_1 = require("./dto/update-trade.dto");
+const swagger_1 = require("@nestjs/swagger");
+const trade_entity_1 = require("./entities/trade.entity");
+let TradeController = class TradeController {
+    constructor(tradeService) {
+        this.tradeService = tradeService;
+    }
+    create(holdingId, createTradeDto) {
+        return this.tradeService.create(+holdingId, createTradeDto);
+    }
+    findAll() {
+        return this.tradeService.findAll();
+    }
+    findOne(id) {
+        return this.tradeService.findOne(+id);
+    }
+    update(id, updateTradeDto) {
+        return this.tradeService.update(+id, updateTradeDto);
+    }
+    markAsSold(id) {
+        return this.tradeService.toggleStatus(+id);
+    }
+    remove(id) {
+        return this.tradeService.remove(+id);
+    }
+};
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Create a trade entry for a holding' }),
+    (0, swagger_1.ApiCreatedResponse)({ type: trade_entity_1.Trade }),
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Query)('holdingId')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, create_trade_dto_1.CreateTradeDto]),
+    __metadata("design:returntype", void 0)
+], TradeController.prototype, "create", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Find all trades' }),
+    (0, swagger_1.ApiOkResponse)({ type: trade_entity_1.Trade, isArray: true }),
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], TradeController.prototype, "findAll", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Get trade by id' }),
+    (0, swagger_1.ApiOkResponse)({ type: trade_entity_1.Trade }),
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], TradeController.prototype, "findOne", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Update trade' }),
+    (0, swagger_1.ApiCreatedResponse)({ type: trade_entity_1.Trade }),
+    (0, common_1.Patch)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_trade_dto_1.UpdateTradeDto]),
+    __metadata("design:returntype", void 0)
+], TradeController.prototype, "update", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Toggle trade sold status' }),
+    (0, swagger_1.ApiCreatedResponse)({ type: trade_entity_1.Trade }),
+    (0, common_1.Patch)(':id/actions/toggle-sold'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], TradeController.prototype, "markAsSold", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Remove trade' }),
+    (0, swagger_1.ApiOkResponse)({ type: trade_entity_1.Trade }),
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], TradeController.prototype, "remove", null);
+TradeController = __decorate([
+    (0, swagger_1.ApiTags)('Trades'),
+    (0, common_1.Controller)('trade'),
+    __metadata("design:paramtypes", [trade_service_1.TradeService])
+], TradeController);
+exports.TradeController = TradeController;
+//# sourceMappingURL=trade.controller.js.map
