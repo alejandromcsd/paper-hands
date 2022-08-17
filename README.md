@@ -1,6 +1,6 @@
 # Paper Hands - React/NodeJS Portfolio Tracker App
 
-Paper Hands is a work-in-progress portfolio tracker app focused on cryptocurrencies. You can create portfolios and link coin positions (amount, avg purchase price). Paper Hands will generate trade recommendations at different profit levels (i.e. take profit at 5x, 8x, 10x, ...).
+Paper Hands is a (work-in-progress) portfolio tracker app focused on cryptocurrencies. You can create portfolios and link coin positions (amount, avg purchase price). Paper Hands will generate trade recommendations at different profit levels (i.e. take profit at 5x, 8x, 10x, ...).
 
 ## Technical details
 
